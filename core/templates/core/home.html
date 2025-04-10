@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% block title %}پروژه سیستم تیکت{% endblock %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .ticket-banner {
+            height: 440px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .ticket-card {
+            width: 250px;
+            height: 150px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ticket-1 {
+            top: 20%;
+            left: 10%;
+            transform: rotate(-5deg);
+        }
+
+        .ticket-2 {
+            top: 30%;
+            right: 10%;
+            transform: rotate(3deg);
+        }
+
+        .ticket-3 {
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%) rotate(1deg);
+        }
+
+        .ticket-strip {
+            height: 10px;
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .ticket-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .ticket-dots span {
+            width: 12px;
+            height: 12px;
+            background: #2575fc;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        .banner-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            right: -50px;
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -30px;
+            left: -30px;
+            animation: pulse 6s infinite ease-in-out reverse;
+        }
+
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: 30%;
+            animation: pulse 5s infinite ease-in-out;
+        }
+
+        .pulse-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.03) 100%);
+            animation: pulse-opacity 4s infinite alternate;
+        }
+
+        .cta-overlay {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-overlay:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse-opacity {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+    <!-- Start Ticket System Banner -->
+    <div class="ticket-banner position-relative overflow-hidden py-5">
+        <!-- Animated Ticket Elements -->
+        <div class="ticket-card ticket-1 position-absolute animate__animated animate__fadeInLeft">
+            <div class="ticket-strip"></div>
+            <div class="ticket-dots">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <div class="ticket-card ticket-2 position-absolute animate__animated animate__fadeInRight animate__delay-1s">
+            <div class="ticket-strip"></div>
+            <div class="ticket-dots">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <div class="ticket-card ticket-3 position-absolute animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="ticket-strip"></div>
+            <div class="ticket-dots">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Animated Background -->
+        <div class="banner-background">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+            <div class="pulse-effect"></div>
+        </div>
+
+        <!-- Interactive CTA (hidden but present for engagement) -->
+        <div class="cta-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+    </div>
+{% endblock %}
