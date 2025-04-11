@@ -23,7 +23,13 @@
                         <a class="nav-link active" aria-current="page" href="{% url 'core:home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login / Register</a>
+                        {% if request.user.is_authenticated %}
+                            <span class="nav-link">
+                                <a href="#dashboard" style="text-decoration: none;color: black;">Dashboard</a>
+                            </span>
+                        {% else %}
+                            <a class="nav-link" href="{% url 'account:login' %}">Login / Register</a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>
@@ -39,7 +45,15 @@
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item"><a href="{% url 'core:home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Login / Register</a></li>
+                <li class="nav-item">
+                    {% if request.user.is_authenticated %}
+                        <span class="nav-link px-2 text-body-secondary">
+                            <a href="#dashboard" style="text-decoration: none;color: black;">Dashboard</a>
+                        </span>
+                    {% else %}
+                        <a href="{% url 'account:login' %}" class="nav-link px-2 text-body-secondary">Login / Register</a>
+                    {% endif %}
+                </li>
             </ul>
             <p class="text-center text-body-secondary">© Ticket System</p>
         </footer>
