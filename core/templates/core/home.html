@@ -5,7 +5,6 @@
 
 {% block content %}
     <main class="main-content">
-        <!-- بخش هیرو -->
         <section class="hero-section">
             <div class="hero-content">
                 <h1 class="hero-title">سیستم مدیریت تیکت پیشرفته</h1>
@@ -29,7 +28,6 @@
             </div>
         </section>
 
-        <!-- ویژگی‌ها -->
         <section class="features-section">
             <h2 class="section-title">ویژگی‌های منحصر به فرد</h2>
             <div class="features-grid">
@@ -72,7 +70,6 @@
             </div>
         </section>
 
-        <!-- آمار و ارقام -->
         <section class="stats-section">
             <h2 class="section-title">آمار سیستم</h2>
             <div class="stats-grid">
@@ -95,17 +92,19 @@
             </div>
         </section>
 
-        <!-- دعوت به اقدام -->
-        <section class="cta-section">
-            <h2 class="cta-title">آماده شروع هستید؟</h2>
-            <p class="cta-desc">
-                همین حالا سیستم مدیریت تیکت خود را راه‌اندازی کنید و تجربه‌ای متفاوت از مدیریت درخواست‌های مشتریان داشته
-                باشید. ما در تمام مراحل همراه شما هستیم.
-            </p>
-            <a href="#register" class="btn btn-primary" style="max-width: 250px; margin: 0 auto; text-decoration: none;">
-                <i class="fas fa-user-plus"></i>
-                ثبت‌نام رایگان
-            </a>
-        </section>
+
+        {% if not request.user.is_authenticated %}
+            <section class="cta-section">
+                <h2 class="cta-title">آماده شروع هستید؟</h2>
+                <p class="cta-desc">
+                    همین حالا سیستم مدیریت تیکت خود را راه‌اندازی کنید و تجربه‌ای متفاوت از مدیریت درخواست‌های مشتریان داشته
+                    باشید. ما در تمام مراحل همراه شما هستیم.
+                </p>
+                <a href="{% url 'account:register' %}" class="btn btn-primary" style="max-width: 250px; margin: 0 auto; text-decoration: none;">
+                    <i class="fas fa-user-plus"></i>
+                    ثبت‌ نام رایگان
+                </a>
+            </section>
+        {% endif %}
     </main>
 {% endblock %}
