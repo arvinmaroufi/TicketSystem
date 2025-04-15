@@ -29,7 +29,13 @@
         </div>
 
         <div class="nav-actions">
-            <a href="#register" class="btn btn-primary" style="text-decoration: none">ورود / ثبت نام</a>
+            {% if request.user.is_authenticated %}
+                <a href="#dashboard" class="btn btn-primary" style="text-decoration: none">
+                    <i class="fas fa-user"></i> پنل کاربری
+                </a>
+            {% else %}
+                <a href="{% url 'account:login' %}" class="btn btn-primary" style="text-decoration: none">ورود / ثبت نام</a>
+            {% endif %}
         </div>
 
         <!-- Hamburger Button -->
@@ -48,7 +54,13 @@
             <a href="{% url 'core:about' %}">درباره ما</a>
             <a href="{% url 'core:contact' %}">تماس با ما</a>
             <a href="{% url 'core:usage_guide' %}">راهنمای استفاده</a>
-            <a href="#register" class="btn btn-primary mobile-login-btn">ورود / ثبت نام</a>
+            {% if request.user.is_authenticated %}
+                <a href="#dashboard" class="btn btn-primary mobile-login-btn">
+                    <i class="fas fa-user"></i> پنل کاربری
+                </a>
+            {% else %}
+                <a href="{% url 'account:login' %}" class="btn btn-primary mobile-login-btn">ورود / ثبت نام</a>
+            {% endif %}
         </div>
     </div>
     <div class="mobile-menu-overlay"></div>

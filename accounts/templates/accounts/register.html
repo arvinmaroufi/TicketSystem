@@ -1,0 +1,458 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت نام</title>
+    <!-- START: Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #121212;
+            --secondary: #F5F5F7;
+            --accent: #D4AF37;
+            --text: #333333;
+            --light-text: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--secondary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 30%);
+        }
+
+        .alert-error {
+            background-color: #F8D7DA;
+            color: #58151C;
+            height: auto;
+            min-height: 57.6px;
+            width: 100%;
+            max-width: 370px;
+            margin: 0 0 8px 0;
+            padding: 16px;
+            position: relative;
+            display: block;
+            border: 1px solid #F1AEB5;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+
+        .auth-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            background-color: var(--primary);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .auth-illustration {
+            flex: 1;
+            background: url({% static 'images/login_register.png' %}) center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+        }
+
+        .auth-illustration::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to top, rgba(18, 18, 18, 0.9) 0%, transparent 100%);
+        }
+
+        .illustration-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .illustration-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--accent), #F9F295);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .illustration-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--light-text);
+            font-weight: 300;
+        }
+
+        .auth-form-container {
+            width: 450px;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-left: 10px;
+        }
+
+        .auth-form-header {
+            margin-bottom: 40px;
+        }
+
+        .auth-form-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .auth-form-header p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .auth-form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            background-color: rgba(245, 245, 247, 0.05);
+            border: 1px solid rgba(245, 245, 247, 0.1);
+            border-radius: 8px;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+            font-size: 1rem;
+        }
+
+        .password-strength {
+            height: 4px;
+            background-color: rgba(245, 245, 247, 0.1);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .strength-meter {
+            height: 100%;
+            width: 0;
+            transition: all 0.3s;
+        }
+
+        .terms-agreement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 0.85rem;
+            color: var(--light-text);
+        }
+
+        .terms-agreement input {
+            margin-left: 10px;
+            accent-color: var(--accent);
+        }
+
+        .terms-agreement a {
+            color: var(--accent);
+            text-decoration: none;
+            margin-right: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background-color: #c9a227;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn i {
+            margin-left: 8px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: var(--light-text);
+            font-size: 0.8rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: rgba(245, 245, 247, 0.1);
+            margin: 0 10px;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .auth-footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-form-container > * {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .auth-form-header { animation-delay: 0.1s; }
+        .form-group:nth-child(1) { animation-delay: 0.2s; }
+        .form-group:nth-child(2) { animation-delay: 0.3s; }
+        .form-group:nth-child(3) { animation-delay: 0.4s; }
+        .form-group:nth-child(4) { animation-delay: 0.5s; }
+        .terms-agreement { animation-delay: 0.6s; }
+        .btn-primary { animation-delay: 0.7s; }
+        .divider { animation-delay: 0.8s; }
+        .auth-footer { animation-delay: 0.9s; }
+
+        @media (max-width: 992px) {
+            .auth-container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+
+            .auth-illustration {
+                padding: 30px;
+                min-height: 200px;
+            }
+
+            .auth-form-container {
+                width: 100%;
+                padding: 40px 30px;
+            }
+
+            .logo {
+                top: 20px;
+                left: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .auth-container {
+                border-radius: 0;
+                min-height: 100vh;
+            }
+
+            .alert-error {
+                padding: 12px;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-illustration">
+            <div class="illustration-content">
+                <h1>سیستم مدیریت تیکت</h1>
+            </div>
+        </div>
+        <div class="auth-form-container">
+            <div class="logo">
+                <i class="fas fa-ticket-alt"></i>
+                <span>سیستم تیکت</span>
+            </div>
+
+            <div class="auth-form-header">
+                <h2>ایجاد حساب کاربری</h2>
+                <p>لطفاً اطلاعات مورد نیاز را وارد نمایید</p>
+            </div>
+
+            <form class="auth-form" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="fullname">نام</label>
+                    <div class="input-wrapper">
+{#                        <input type="text" id="first_name" class="form-control" placeholder="نام" required>#}
+                        {{ form.first_name }}
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fullname">نام خانوادگی</label>
+                    <div class="input-wrapper">
+{#                        <input type="text" id="last_name" class="form-control" placeholder="نام خانوادگی" required>#}
+                        {{ form.last_name }}
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                </div>
+
+                {% for error_username in form.username.errors %}
+                    {% if error_username %}
+                        <p class="alert-error">{{ error_username }}</p>
+                    {% endif %}
+                {% endfor %}
+                <div class="form-group">
+                    <label for="fullname">نام کاربری</label>
+                    <div class="input-wrapper">
+{#                        <input type="text" id="username" class="form-control" placeholder="نام کاربری" required>#}
+                        {{ form.username }}
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                </div>
+
+                {% for error_email in form.email.errors %}
+                    {% if error_email %}
+                        <p class="alert-error">{{ error_email }}</p>
+                    {% endif %}
+                {% endfor %}
+                <div class="form-group">
+                    <label for="email">آدرس ایمیل</label>
+                    <div class="input-wrapper">
+{#                        <input type="email" id="email" class="form-control" placeholder="example@domain.com" required>#}
+                        {{ form.email }}
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                </div>
+
+                {% for error_password in form.password.errors %}
+                    {% if error_password %}
+                        <p class="alert-error">{{ error_password }}</p>
+                    {% endif %}
+                {% endfor %}
+                <div class="form-group">
+                    <label for="password">رمز عبور</label>
+                    <div class="input-wrapper">
+{#                        <input type="password" id="password" class="form-control" placeholder="••••••••" required>#}
+                        {{ form.password }}
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    ثبت‌ نام
+                </button>
+
+                <div class="divider">یا</div>
+
+                <div class="auth-footer">
+                    قبلاً ثبت ‌نام کرده‌اید؟ <a href="{% url 'account:login' %}" style="text-decoration: none">وارد شوید</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
