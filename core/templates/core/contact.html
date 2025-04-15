@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %}تماس با ما{% endblock %}
+{% load static %}
+
+{% block content %}
+    <main class="main-content">
+        <!-- بخش هیرو تماس با ما - بدون تصویر -->
+        <section class="hero-section" style="flex-direction: column; text-align: center; padding: 60px 0 40px;">
+            <div class="hero-content" style="max-width: 800px; margin: 0 auto;">
+                <h1 class="hero-title">راه‌های ارتباط با ما</h1>
+                <p class="hero-subtitle">
+                    برای هرگونه سوال، پیشنهاد یا انتقاد، تیم پشتیبانی ما آماده پاسخگویی به شماست. ما ارزش ارتباط با شما را می‌دانیم.
+                </p>
+            </div>
+        </section>
+
+        <!-- اطلاعات تماس -->
+        <section class="features-section">
+            <h2 class="section-title" style="text-align: center;">اطلاعات تماس</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="feature-title">آدرس دفتر مرکزی</h3>
+                    <p class="feature-desc">
+                        تهران، خیابان آزادی، دانشگاه صنعتی شریف، مرکز رشد فناوری، طبقه سوم، واحد ۱۲
+                        <br><br>
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">پشتیبانی تلفنی</h3>
+                    <p class="feature-desc">
+                        <strong>پشتیبانی فنی:</strong> 09181234567<br>
+                        <strong>ساعات کاری:</strong> شنبه تا چهارشنبه ۸:۳۰ تا ۱۷
+                        <br><br>
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="feature-title">راه‌های ارتباط الکترونیک</h3>
+                    <p class="feature-desc">
+                        <strong>پشتیبانی:</strong> ticket@gmail.com<br>
+                        <br><br>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- فرم تماس -->
+        <section class="cta-section" style="max-width: 800px; margin: 0 auto;">
+            <h2 class="cta-title">فرم تماس با ما</h2>
+            <p class="cta-desc" style="margin-bottom: 30px;">
+                فرم زیر را پر کنید تا در اسرع وقت با شما تماس بگیریم.
+            </p>
+
+            <form method="post" style="display: grid; gap: 20px;">
+                {% csrf_token %}
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label for="name" style="display: block; margin-bottom: 8px; color: var(--light-text);">نام کامل</label>
+                        <input type="text" name="full_name" id="full_name" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--card-border); background-color: var(--card-bg); color: var(--secondary);">
+                    </div>
+                    <div>
+                        <label for="email" style="display: block; margin-bottom: 8px; color: var(--light-text);">پست الکترونیک</label>
+                        <input type="email" name="email" id="email" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--card-border); background-color: var(--card-bg); color: var(--secondary);">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="subject" style="display: block; margin-bottom: 8px; color: var(--light-text);">موضوع</label>
+                    <input type="text" name="subject" id="subject" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--card-border); background-color: var(--card-bg); color: var(--secondary);">
+                </div>
+
+                <div>
+                    <label for="message" style="display: block; margin-bottom: 8px; color: var(--light-text);">پیام شما</label>
+                    <textarea name="message" id="message" rows="5" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--card-border); background-color: var(--card-bg); color: var(--secondary);"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1rem;">
+                    <i class="fas fa-paper-plane"></i>
+                    ارسال پیام
+                </button>
+            </form>
+        </section>
+
+        <!-- سوالات متداول -->
+        <section class="features-section" style="margin-top: 60px;">
+            <h2 class="section-title" style="text-align: center;">سوالات متداول</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="feature-card" style="margin-bottom: 20px;">
+                    <h3 class="feature-title">ساعات پاسخگویی به تماس‌ها چگونه است؟</h3>
+                    <p class="feature-desc">
+                        پشتیبانی تلفنی از ساعت ۸:۳۰ تا ۱۷ روزهای شنبه تا چهارشنبه و در روزهای پنجشنبه از ۸:۳۰ تا ۱۳ فعال است. پشتیبانی آنلاین از طریق تیکت به صورت ۲۴ ساعته و ۷ روز هفته در دسترس است.
+                    </p>
+                </div>
+                <div class="feature-card" style="margin-bottom: 20px;">
+                    <h3 class="feature-title">مدت زمان پاسخگویی به پیام‌های ارسالی چقدر است؟</h3>
+                    <p class="feature-desc">
+                        پیام‌های ارسالی از طریق فرم تماس حداکثر در مدت ۲ ساعت کاری پاسخ داده می‌شوند. برای پیگیری سریع‌تر می‌توانید از شماره‌های پشتیبانی تلفنی استفاده کنید.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">آیا امکان بازدید از دفتر شرکت وجود دارد؟</h3>
+                    <p class="feature-desc">
+                        بله، با هماهنگی قبلی از طریق تلفن یا ایمیل می‌توانید از دفتر ما بازدید کنید. لطفاً حداقل ۲۴ ساعت قبل برای هماهنگی اقدام فرمایید.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

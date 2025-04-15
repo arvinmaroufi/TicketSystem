@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- START: Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <!-- Start Navbar -->
+    <nav class="navbar">
+        <a href="{% url 'core:home' %}" class="logo">
+            <i class="fas fa-ticket"></i>
+            <span>سیستم تیکت</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="{% url 'core:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">صفحه اصلی</a>
+            <a href="{% url 'core:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">درباره ما</a>
+            <a href="{% url 'core:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">تماس با ما</a>
+            <a href="{% url 'core:usage_guide' %}" class="{% if request.resolver_match.url_name == 'usage_guide' %}active{% endif %}">راهنمای استفاده</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="#register" class="btn btn-primary" style="text-decoration: none">ورود / ثبت نام</a>
+        </div>
+
+        <!-- Hamburger Button -->
+        <button class="hamburger-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <button class="mobile-close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mobile-links">
+            <a href="{% url 'core:home' %}">صفحه اصلی</a>
+            <a href="{% url 'core:about' %}">درباره ما</a>
+            <a href="{% url 'core:contact' %}">تماس با ما</a>
+            <a href="{% url 'core:usage_guide' %}">راهنمای استفاده</a>
+            <a href="#register" class="btn btn-primary mobile-login-btn">ورود / ثبت نام</a>
+        </div>
+    </div>
+    <div class="mobile-menu-overlay"></div>
+    <!-- End Navbar -->
+
+    <!-- Start Content -->
+    {% block content %}{% endblock %}
+    <!-- End Content -->
+
+
+    <!-- Start Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>سیستم تیکت</h3>
+                <p style="color: var(--light-text); line-height: 1.8; margin-bottom: 20px;">
+                    سیستم مدیریت تیکت پیشرفته برای کسب‌وکارهای کوچک و بزرگ با قابلیت‌های منحصر به فرد
+                </p>
+                <div class="footer-social">
+                    <a href="https://t.me/arvinmaroufi_ir" class="social-icon" style="text-decoration: none"><i class="fab fa-telegram"></i></a>
+                    <a href="https://instagram.com/arvinmaroufi.ir" class="social-icon" style="text-decoration: none"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/arvinmaroufi" class="social-icon" style="text-decoration: none"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/arvinmaroufi" class="social-icon" style="text-decoration: none"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>لینک‌های مفید</h3>
+                <ul class="footer-links">
+                    <li><a href="{% url 'core:home' %}"><i class="fas fa-chevron-left"></i> صفحه اصلی</a></li>
+                    <li><a href="{% url 'core:about' %}"><i class="fas fa-chevron-left"></i> درباره ما</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>پشتیبانی</h3>
+                <ul class="footer-links">
+                    <li><a href="{% url 'core:contact' %}"><i class="fas fa-chevron-left"></i> تماس با ما</a></li>
+                    <li><a href="{% url 'core:usage_guide' %}"><i class="fas fa-chevron-left"></i> راهنمای استفاده</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>تماس با ما</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> تهران، خیابان آزادی، دانشگاه شریف</a></li>
+                    <li><a href="tel:+982144444444"><i class="fas fa-phone"></i> 09181234567</a></li>
+                    <li><a href="mailto:info@ticket.com"><i class="fas fa-envelope"></i> ticket@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 سیستم مدیریت تیکت. تمام حقوق محفوظ است.</p>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.querySelector('.hamburger-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+            const closeBtn = document.querySelector('.mobile-close-btn');
+            const mobileLinks = document.querySelectorAll('.mobile-links a');
+
+            // Toggle mobile menu
+            hamburgerBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+                mobileOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Close mobile menu
+            function closeMenu() {
+                mobileMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // Close when clicking overlay or close button
+            mobileOverlay.addEventListener('click', closeMenu);
+            closeBtn.addEventListener('click', closeMenu);
+
+            // Close when clicking on links
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+        });
+    </script>
+</body>
+</html>

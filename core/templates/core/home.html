@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}سیستم تیکت{% endblock %}
+{% load static %}
+
+
+{% block content %}
+    <main class="main-content">
+        <!-- بخش هیرو -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">سیستم مدیریت تیکت پیشرفته</h1>
+                <p class="hero-subtitle">
+                    راه‌حل جامع برای مدیریت درخواست‌ها و تیکت‌های مشتریان. با سیستم ما می‌توانید به راحتی تیکت‌ها را
+                    پیگیری، پاسخ دهید و مدیریت کنید.
+                </p>
+                <div class="hero-buttons" style="display: flex; gap: 15px;">
+                    <a href="{% url 'core:usage_guide' %}" class="btn btn-primary" style="text-decoration: none">
+                        <i class="fas fa-book"></i>
+                        راهنمای استفاده
+                    </a>
+                    <a href="{% url 'core:contact' %}" class="btn btn-outline" style="text-decoration: none">
+                        <i class="fas fa-phone"></i>
+                        تماس با ما
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="{% static 'images/dashboard.jpeg' %}" alt="پیش‌نمایش سیستم مدیریت تیکت">
+            </div>
+        </section>
+
+        <!-- ویژگی‌ها -->
+        <section class="features-section">
+            <h2 class="section-title">ویژگی‌های منحصر به فرد</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 class="feature-title">داشبورد هوشمند</h3>
+                    <p class="feature-desc">
+                        مشاهده آمار تیکت ‌های جدید، در حال بررسی، حل شده و بسته شده در یک نگاه با رابط کاربری جذاب
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-ticket"></i>
+                    </div>
+                    <h3 class="feature-title">مدیریت تیکت‌ ها</h3>
+                    <p class="feature-desc">
+                        ایجاد، ویرایش و پیگیری تیکت‌ ها با قابلیت تعیین اولویت (بالا، متوسط، پایین) و وضعیت (باز، در حال بررسی، حل شده، بسته شده)
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">مدیریت مشتریان</h3>
+                    <p class="feature-desc">
+                        سیستم جامع مدیریت مشتریان با امکان ثبت تیکت‌های جدید و پیگیری تاریخچه تیکت‌های قبلی
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h3 class="feature-title">مدیریت کاربران</h3>
+                    <p class="feature-desc">
+                        تعیین سطوح دسترسی مختلف برای کاربران سیستم (مدیر، پشتیبانی، مالی و ...)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- آمار و ارقام -->
+        <section class="stats-section">
+            <h2 class="section-title">آمار سیستم</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">+500</div>
+                    <div class="stat-label">شرکت فعال</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">+95%</div>
+                    <div class="stat-label">رضایت مشتریان</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">پشتیبانی</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">+10K</div>
+                    <div class="stat-label">تیکت روزانه</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- دعوت به اقدام -->
+        <section class="cta-section">
+            <h2 class="cta-title">آماده شروع هستید؟</h2>
+            <p class="cta-desc">
+                همین حالا سیستم مدیریت تیکت خود را راه‌اندازی کنید و تجربه‌ای متفاوت از مدیریت درخواست‌های مشتریان داشته
+                باشید. ما در تمام مراحل همراه شما هستیم.
+            </p>
+            <a href="#register" class="btn btn-primary" style="max-width: 250px; margin: 0 auto; text-decoration: none;">
+                <i class="fas fa-user-plus"></i>
+                ثبت‌نام رایگان
+            </a>
+        </section>
+    </main>
+{% endblock %}

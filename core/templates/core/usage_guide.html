@@ -1,0 +1,270 @@
+{% extends 'base.html' %}
+{% block title %}راهنمای استفاده{% endblock %}
+{% load static %}
+
+{% block content %}
+    <main class="main-content">
+        <!-- بخش هیرو راهنما -->
+        <section class="hero-section" style="flex-direction: column; text-align: center; padding: 60px 0 40px;">
+            <div class="hero-content" style="max-width: 800px; margin: 0 auto;">
+                <h1 class="hero-title">راهنمای استفاده از سیستم</h1>
+                <p class="hero-subtitle">
+                    در این بخش می‌توانید با امکانات سیستم مدیریت تیکت آشنا شوید و نحوه استفاده از هر بخش را یاد بگیرید.
+                </p>
+                <div class="hero-buttons" style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                    <a href="#dashboard" class="btn btn-outline" style="text-decoration: none;">
+                        <i class="fas fa-tachometer-alt"></i>
+                        راهنمای داشبورد
+                    </a>
+                    <a href="#faq" class="btn btn-outline" style="text-decoration: none;">
+                        <i class="fas fa-question-circle"></i>
+                        سوالات متداول
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- فهرست مطالب -->
+        <section class="features-section" style="background-color: rgba(18, 18, 18, 0.7); padding: 30px; border-radius: 15px; margin-bottom: 40px;">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 25px;">فهرست مطالب</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <a href="#dashboard" class="btn btn-outline" style="text-align: center; padding: 12px; text-decoration: none;">
+                    <i class="fas fa-tachometer-alt"></i> داشبورد
+                </a>
+                <a href="#tickets" class="btn btn-outline" style="text-align: center; padding: 12px; text-decoration: none;">
+                    <i class="fas fa-ticket-alt"></i> مدیریت تیکت‌ها
+                </a>
+                <a href="#new-ticket" class="btn btn-outline" style="text-align: center; padding: 12px; text-decoration: none;">
+                    <i class="fas fa-plus-circle"></i> ایجاد تیکت جدید
+                </a>
+                <a href="#customers" class="btn btn-outline" style="text-align: center; padding: 12px; text-decoration: none;">
+                    <i class="fas fa-users"></i> مدیریت مشتریان
+                </a>
+            </div>
+        </section>
+
+        <!-- بخش داشبورد -->
+        <section id="dashboard" class="features-section" style="margin-bottom: 60px;">
+            <h2 class="section-title">راهنمای داشبورد</h2>
+
+            <div class="feature-card" style="margin-bottom: 30px;">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3 class="feature-title">کارت‌های آماری</h3>
+                <p class="feature-desc">
+                    در بخش بالای داشبورد، چهار کارت آماری مشاهده می‌کنید که وضعیت تیکت‌ها را به صورت خلاصه نمایش می‌دهند:
+                    <ul style="margin-right: 20px; margin-top: 10px; color: var(--light-text);">
+                        <li>تیکت‌های جدید (آبی)</li>
+                        <li>تیکت‌های در حال بررسی (نارنجی)</li>
+                        <li>تیکت‌های حل شده (سبز)</li>
+                        <li>تیکت‌های بسته شده (قرمز)</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-table"></i>
+                </div>
+                <h3 class="feature-title">جدول تیکت‌های اخیر</h3>
+                <p class="feature-desc">
+                    در بخش پایین داشبورد، جدولی از آخرین تیکت‌های ایجاد شده را مشاهده می‌کنید که شامل این اطلاعات است:
+                    <ul style="margin-right: 20px; margin-top: 10px; color: var(--light-text);">
+                        <li>شماره تیکت</li>
+                        <li>موضوع تیکت</li>
+                        <li>وضعیت تیکت (باز، در حال بررسی، حل شده، بسته شده)</li>
+                        <li>اولویت تیکت (پایین، متوسط، بالا)</li>
+                        <li>تاریخ ایجاد</li>
+                        <li>دکمه مشاهده برای جزئیات بیشتر</li>
+                    </ul>
+                </p>
+            </div>
+        </section>
+
+        <!-- مدیریت تیکت‌ها -->
+        <section id="tickets" class="features-section" style="margin-bottom: 60px;">
+            <h2 class="section-title">مدیریت تیکت‌ها</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3 class="feature-title">فیلتر کردن تیکت‌ها</h3>
+                    <p class="feature-desc">
+                        در صفحه مدیریت تیکت‌ها می‌توانید از فیلترهای مختلف برای دسته‌بندی تیکت‌ها استفاده کنید:
+                        - فیلتر بر اساس وضعیت
+                        - فیلتر بر اساس اولویت
+                        - فیلتر بر اساس تاریخ
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="feature-title">جستجوی تیکت‌ها</h3>
+                    <p class="feature-desc">
+                        از نوار جستجو می‌توانید تیکت‌ها را بر اساس:
+                        - شماره تیکت
+                        - موضوع تیکت
+                        - محتوای تیکت
+                        - نام مشتری
+                        جستجو کنید.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="feature-title">تغییر وضعیت تیکت‌ها</h3>
+                    <p class="feature-desc">
+                        برای تغییر وضعیت تیکت‌ها:
+                        1. تیکت مورد نظر را انتخاب کنید
+                        2. از منوی عملیات، وضعیت جدید را انتخاب نمایید
+                        3. در صورت نیاز، توضیحات اضافه کنید
+                        4. تغییرات را ذخیره کنید
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature-card" style="margin-top: 30px;">
+                <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="feature-title">مدیریت مکالمات تیکت</h3>
+                <p class="feature-desc">
+                    در صفحه جزئیات هر تیکت می‌توانید:
+                    - تمام مکالمات مربوط به تیکت را مشاهده کنید
+                    - پاسخ جدید ارسال کنید
+                    - فایل پیوست کنید
+                    - وضعیت تیکت را تغییر دهید
+                </p>
+            </div>
+        </section>
+
+        <!-- ایجاد تیکت جدید -->
+        <section id="new-ticket" class="features-section" style="margin-bottom: 60px;">
+            <h2 class="section-title">ایجاد تیکت جدید</h2>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-plus-square"></i>
+                </div>
+                <h3 class="feature-title">فرم ایجاد تیکت</h3>
+                <p class="feature-desc">
+                    برای ایجاد تیکت جدید:
+                    <ol style="margin-right: 20px; margin-top: 10px; color: var(--light-text);">
+                        <li>از منوی سمت راست روی "تیکت جدید" کلیک کنید</li>
+                        <li>موضوع تیکت را وارد نمایید</li>
+                        <li>دپارتمان مربوطه را انتخاب کنید</li>
+                        <li>اولویت تیکت را مشخص کنید</li>
+                        <li>توضیحات کامل مشکل یا درخواست را بنویسید</li>
+                        <li>در صورت نیاز فایل پیوست اضافه کنید</li>
+                        <li>روی دکمه "ارسال تیکت" کلیک کنید</li>
+                    </ol>
+                </p>
+            </div>
+
+            <div style="margin-top: 40px; background-color: rgba(212, 175, 55, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <h3 style="color: var(--accent); margin-bottom: 15px; font-size: 1.2rem;">
+                    <i class="fas fa-lightbulb" style="margin-left: 8px;"></i>
+                    نکته مهم
+                </h3>
+                <p style="color: var(--light-text); line-height: 1.8;">
+                    برای ایجاد تیکت سریع می‌توانید از کلیدهای میانبر <kbd>Ctrl</kbd> + <kbd>T</kbd> استفاده کنید.
+                </p>
+            </div>
+        </section>
+
+        <!-- مدیریت مشتریان -->
+        <section id="customers" class="features-section">
+            <h2 class="section-title">مدیریت مشتریان</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 class="feature-title">افزودن مشتری جدید</h3>
+                    <p class="feature-desc">
+                        برای افزودن مشتری جدید:
+                        1. به بخش "مشتریان" بروید
+                        2. روی دکمه "مشتری جدید" کلیک کنید
+                        3. اطلاعات مشتری را وارد کنید
+                        4. اطلاعات را ذخیره کنید
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="feature-title">تاریخچه تیکت‌های مشتری</h3>
+                    <p class="feature-desc">
+                        در صفحه هر مشتری می‌توانید:
+                        - تمام تیکت‌های ارسالی توسط مشتری را مشاهده کنید
+                        - وضعیت تیکت‌ها را بررسی کنید
+                        - زمان پاسخگویی را تحلیل کنید
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3 class="feature-title">ویرایش اطلاعات مشتری</h3>
+                    <p class="feature-desc">
+                        برای ویرایش اطلاعات مشتری:
+                        1. مشتری مورد نظر را انتخاب کنید
+                        2. روی دکمه "ویرایش" کلیک کنید
+                        3. تغییرات مورد نظر را اعمال کنید
+                        4. تغییرات را ذخیره کنید
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- سوالات متداول -->
+        <section id="faq" class="features-section">
+            <h2 class="section-title" style="text-align: center;">سوالات متداول</h2>
+
+            <div class="feature-card" style="margin-bottom: 20px;">
+                <h3 class="feature-title">چگونه می‌توانم چند تیکت را همزمان مدیریت کنم؟</h3>
+                <p class="feature-desc">
+                    در صفحه لیست تیکت‌ها، با استفاده از چک‌باکس‌های کنار هر تیکت می‌توانید چند مورد را انتخاب و سپس عملیات گروهی (مانند تغییر وضعیت یا اختصاص به کارشناس) انجام دهید.
+                </p>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 20px;">
+                <h3 class="feature-title">آیا امکان ارسال پاسخ‌های از پیش تعریف شده وجود دارد؟</h3>
+                <p class="feature-desc">
+                    بله، در بخش «پاسخ‌های سریع» می‌توانید متن‌های از پیش تعریف شده ایجاد کنید و هنگام پاسخ به تیکت‌ها از آنها استفاده نمایید.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-title">چگونه می‌توانم دسترسی اعضای تیم را محدود کنم؟</h3>
+                <p class="feature-desc">
+                    در بخش «تنظیمات تیم» برای هر کاربر می‌توانید سطح دسترسی تعیین کنید (مثل ادمین، کارشناس پشتیبانی، کاربر عادی). همچنین می‌توانید دسترسی به پروژه‌های خاص را محدود نمایید.
+                </p>
+            </div>
+        </section>
+
+        <!-- بخش پشتیبانی -->
+        <section class="cta-section" style="margin-top: 60px;">
+            <h2 class="cta-title">نیاز به کمک دارید؟</h2>
+            <p class="cta-desc">
+                اگر پس از مطالعه این راهنما همچنان سوالی دارید، تیم پشتیبانی ما آماده کمک به شماست.
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <a href="{% url 'core:contact' %}" class="btn btn-primary" style="text-decoration: none">
+                    <i class="fas fa-headset"></i>
+                    تماس با پشتیبانی
+                </a>
+            </div>
+        </section>
+    </main>
+{% endblock %}

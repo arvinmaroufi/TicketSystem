@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}درباره ما{% endblock %}
+{% load static %}
+
+{% block content %}
+    <main class="main-content">
+        <!-- بخش هیرو درباره ما - بدون تصویر -->
+        <section class="hero-section" style="flex-direction: column; text-align: center; padding: 60px 0;">
+            <div class="hero-content" style="max-width: 800px; margin: 0 auto;">
+                <h1 class="hero-title">درباره سیستم مدیریت تیکت ما</h1>
+                <p class="hero-subtitle">
+                    راه‌حل هوشمند برای مدیریت درخواست‌های مشتریان با بیش از 5 سال تجربه در زمینه پشتیبانی سازمانی
+                </p>
+            </div>
+        </section>
+
+        <!-- تاریخچه شرکت -->
+        <section class="features-section" style="background-color: rgba(18, 18, 18, 0.7); padding: 60px 40px; border-radius: 20px; margin-bottom: 60px;">
+            <h2 class="section-title" style="text-align: center;">تاریخچه ما</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--light-text); line-height: 1.8;">
+                <p>
+                    سیستم مدیریت تیکت ما در سال ۱۳۹۸ با هدف ساده‌سازی فرآیندهای پشتیبانی مشتریان تأسیس شد.
+                    از آن زمان تاکنون، ما به بیش از ۵۰۰ شرکت در سراسر کشور خدمات ارائه داده‌ایم و رضایت ۹۵٪ از مشتریان را جلب کرده‌ایم.
+                </p>
+                <p style="margin-top: 20px;">
+                    تیم ما متشکل از ۲۰ متخصص با تجربه در حوزه‌های فناوری اطلاعات، هوش مصنوعی و مدیریت ارتباط با مشتری است که همواره در حال توسعه و بهبود سیستم هستند.
+                </p>
+            </div>
+        </section>
+
+        <!-- ماموریت و ارزش‌ها -->
+        <section class="features-section">
+            <h2 class="section-title">چرا ما را انتخاب کنید؟</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="feature-title">ماموریت ما</h3>
+                    <p class="feature-desc">
+                        ارائه راهکارهای هوشمند و کاربرپسند برای ساده‌سازی فرآیندهای پشتیبانی و افزایش رضایت مشتریان با استفاده از آخرین فناوری‌های روز دنیا.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">توسعه مستمر</h3>
+                    <p class="feature-desc">
+                        ما هر ماه ویژگی‌های جدیدی به سیستم اضافه می‌کنیم و بر اساس بازخوردهای شما محصول خود را بهبود می‌بخشیم.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">تیم متخصص</h3>
+                    <p class="feature-desc">
+                        تیمی از بهترین متخصصان حوزه فناوری اطلاعات و پشتیبانی مشتریان که همواره پشت شما هستند تا بهترین تجربه را داشته باشید.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- آمار و ارقام -->
+        <section class="stats-section" style="background-color: rgba(212, 175, 55, 0.05); border-radius: 20px; padding: 40px; border: 1px solid rgba(212, 175, 55, 0.1);">
+            <h2 class="section-title" style="text-align: center;">در یک نگاه</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">سال تجربه</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">شرکت فعال</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">رضایت مشتری</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">متخصص</div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
