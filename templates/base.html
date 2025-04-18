@@ -30,7 +30,7 @@
 
         <div class="nav-actions">
             {% if request.user.is_authenticated %}
-                <a href="#dashboard" class="btn btn-primary" style="text-decoration: none">
+                <a href="{% url 'tickets:dashboard' %}" class="btn btn-primary" style="text-decoration: none">
                     <i class="fas fa-user"></i> پنل کاربری
                 </a>
             {% else %}

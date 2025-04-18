@@ -1,0 +1,103 @@
+{% extends 'dashboard.html' %}
+{% block title %}داشبورد{% endblock %}
+{% load static %}
+{% load jalali_tags %}
+
+{% block content %}
+    <div class="main-content">
+        <!-- هدر -->
+        <div class="header">
+            <h2>داشبورد</h2>
+            <div class="user-info">
+                <span>{{ request.user.username }}</span>
+                {% if request.user.profile.image %}
+                    <img src="{{ request.user.profile.image.url }}" alt="{{ request.user.username }}">
+                {% else %}
+                    <img src="{% static 'images/profile.png' %}" alt="{{ request.user.username }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- کارت‌های آماری -->
+        <div class="cards">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>{{ ticket_stats.new }}</h3>
+                        <p>تیکت‌های جدید</p>
+                    </div>
+                    <div class="card-icon blue">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>{{ ticket_stats.in_progress }}</h3>
+                        <p>در حال بررسی</p>
+                    </div>
+                    <div class="card-icon orange">
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>{{ ticket_stats.resolved }}</h3>
+                        <p>حل شده</p>
+                    </div>
+                    <div class="card-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>{{ ticket_stats.closed }}</h3>
+                        <p>بسته شده</p>
+                    </div>
+                    <div class="card-icon red">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- جدول تیکت‌های اخیر -->
+        <div class="ticket-table">
+            <div class="header">
+                <h2>تیکت‌های اخیر</h2>
+                <button class="btn btn-primary">تیکت جدید</button>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>شماره تیکت</th>
+                    <th>موضوع</th>
+                    <th>وضعیت</th>
+                    <th>اولویت</th>
+                    <th>تاریخ ایجاد</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ticket in recent_tickets %}
+                    <tr>
+                        <td>#TKT-{{ ticket.id }}</td>
+                        <td>{{ ticket.subject }}</td>
+                        <td><span class="status" style="background-color: {{ ticket.status.color }}">{{ ticket.status.name }}</span></td>
+                        <td><span class="priority" style="background-color: {{ ticket.priority.color }}"></span> {{ ticket.priority.name }}</td>
+                        <td>{{ ticket.created_at|to_jalali:'%Y/%m/%d' }}</td>
+                        <td>
+                            <button class="btn btn-primary">مشاهده</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
