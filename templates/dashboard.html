@@ -15,48 +15,55 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <h3>سیستم تیکت‌دهی</h3>
+            <h3>سیستم تیکت ‌دهی</h3>
         </div>
+
+        <div class="sidebar-promo" style="background: rgba(212, 175, 55, 0.1); padding: 10px; margin: 10px; border-radius: 5px; text-align: center;">
+            <a href="{% url 'core:home' %}" style="color: #D4AF37; text-decoration: none;">
+                <i class="fas fa-home"></i> صفحه اصلی سیستم
+            </a>
+        </div>
+
         <div class="sidebar-menu">
             <ul>
-                <li class="active">
+                <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
                     <a href="{% url 'tickets:dashboard' %}">
                         <i class="fas fa-tachometer-alt"></i>
                         <span>داشبورد</span>
                     </a>
                 </li>
-                <li>
-                    <a href="tickets.html">
+                <li class="{% if request.resolver_match.url_name == 'ticket_list' %}active{% endif %}">
+                    <a href="{% url 'tickets:ticket_list' %}">
                         <i class="fas fa-ticket-alt"></i>
-                        <span>تیکت‌ها</span>
+                        <span>تیکت ‌ها</span>
                     </a>
                 </li>
-                <li>
-                    <a href="new_ticket.html">
+                <li class="{% if request.resolver_match.url_name == 'new_ticket' %}active{% endif %}">
+                    <a href="{% url 'tickets:new_ticket' %}">
                         <i class="fas fa-plus-circle"></i>
                         <span>تیکت جدید</span>
                     </a>
                 </li>
                 <li>
-                    <a href="customers.html">
+                    <a href="#users">
                         <i class="fas fa-users"></i>
-                        <span>مشتریان</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="users.html">
-                        <i class="fas fa-user-cog"></i>
                         <span>کاربران</span>
                     </a>
                 </li>
                 <li>
-                    <a href="settings.html">
+                    <a href="#edit_profile">
+                        <i class="fas fa-user-cog"></i>
+                        <span>ویرایش پروفایل</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings">
                         <i class="fas fa-cog"></i>
                         <span>تنظیمات</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{% url 'account:logout' %}">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>خروج</span>
                     </a>

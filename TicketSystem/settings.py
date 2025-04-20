@@ -120,7 +120,7 @@ MEDIA_URL = 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = 'accounts:login'
+LOGIN_URL = 'account:login'
 
 
 # JALALI DATE Settings (optional)

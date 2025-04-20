@@ -1,0 +1,144 @@
+{% extends 'dashboard.html' %}
+{% block title %}جزئیات{% endblock %}
+{% load static %}
+{% load jalali_tags %}
+{% load custom_filters %}
+
+{% block content %}
+    <div class="main-content">
+        <div class="header">
+            <h2>جزئیات تیکت</h2>
+            <div class="user-info">
+                <span>{{ request.user.username }}</span>
+                {% if request.user.profile.image %}
+                    <img src="{{ request.user.profile.image.url }}" alt="{{ request.user.username }}">
+                {% else %}
+                    <img src="{% static 'images/profile.png' %}" alt="{{ request.user.username }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="ticket-details-container">
+            <div class="ticket-header">
+                <div>
+                    <h3 class="ticket-title">{{ ticket.subject }}</h3>
+                    <div class="ticket-meta">
+                        <span>شماره تیکت: #TKT-{{ ticket.id }}</span>
+                        <span>وضعیت: <span class="status"
+                                           style="background-color: {{ ticket.status.color }}">{{ ticket.status.name }}</span></span>
+                        <span>اولویت: <span class="priority"
+                                            style="background-color: {{ ticket.priority.color }}"></span>{{ ticket.priority.name }}</span>
+                        <span>تاریخ ایجاد: {{ ticket.created_at|to_jalali:'%Y/%m/%d' }}</span>
+                    </div>
+                </div>
+                <div class="ticket-actions">
+                    {% if is_admin %}
+                        <form method="post" action="{% url 'tickets:close_ticket' ticket.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i> بستن تیکت</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="ticket-info">
+                <div class="info-card">
+                    <h4>اطلاعات تیکت</h4>
+                    <div class="info-grid">
+                        <div class="info-group">
+                            <span class="info-label">کاربر:</span>
+                            <span class="info-value">
+                                {% if request.user.profile.first_name and request.user.profile.last_name %}
+                                    {{ request.user.profile.first_name }} {{ request.user.profile.last_name }}
+                                {% else %}
+                                    {{ request.user.username }}
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="info-group">
+                            <span class="info-label">دپارتمان:</span>
+                            <span class="info-value">{{ ticket.department.name }}</span>
+                        </div>
+                        <div class="info-group">
+                            <span class="info-label">اختصاص داده شده به:</span>
+                            <span class="info-value">پشتیبانی</span>
+                        </div>
+                        <div class="info-group">
+                            <span class="info-label">آخرین بروزرسانی:</span>
+                            <span class="info-value">{{ ticket.updated_at|to_jalali:'%H:%M - %Y/%m/%d' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket-conversation">
+                {% for message in ticket.messages.all %}
+                    <div class="message {% if message.user.is_staff or message.user.is_superuser %}agent{% else %}customer{% endif %}">
+                        <div class="message-header">
+                            {% if message.user.profile.image %}
+                                <img src="{{ message.user.profile.image.url }}" alt="{{ message.user.username }}"
+                                     class="avatar">
+                            {% else %}
+                                <img src="{% static 'images/profile.png' %}" alt="{{ message.user.username }}"
+                                     class="avatar">
+                            {% endif %}
+                            <div class="sender-info">
+                                <span class="sender-name">
+                                    {% if message.user.profile.first_name and message.user.profile.last_name %}
+                                        {{ message.user.profile.first_name }} {{ message.user.profile.last_name }}
+                                    {% else %}
+                                        {{ message.user.username }}
+                                    {% endif %}
+                                </span>
+                                <span class="message-date">{{ ticket.updated_at|to_jalali:'%H:%M - %Y/%m/%d' }}</span>
+                            </div>
+                        </div>
+                        <div class="message-body">
+                            <p>{{ message.message }}</p>
+                            {% for attachment in message.attachments.all %}
+                                <div class="attachment">
+                                    <i class="fas fa-paperclip"></i>
+                                    <span>{{ attachment.file.name|basename }}</span>
+                                    <a href="{{ attachment.file.url }}" class="download-link"><i
+                                            class="fas fa-download"></i></a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if not ticket.is_closed and not ticket.status.is_closed %}
+                <div class="ticket-reply">
+                    <h4>پاسخ به تیکت</h4>
+                    <form method="post" action="{% url 'tickets:reply_ticket' ticket.id %}"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="reply-message">پیام</label>
+                            <textarea id="reply-message" name="reply-message" class="form-control" rows="5"
+                                      placeholder="پاسخ خود را اینجا بنویسید..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="reply-attachment">پیوست</label>
+                            <input type="file" id="reply-attachment" name="reply-attachment" class="form-control">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">ارسال پاسخ</button>
+                        </div>
+                    </form>
+                </div>
+            {% else %}
+                <div style="margin-top: 40px; background-color: rgba(212, 175, 55, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(212, 175, 55, 0.1);">
+                    <h3 style="color: #D4AF37; margin-bottom: 15px; font-size: 1.2rem;">
+                        <i class="fas fa-info-circle" style="margin-left: 8px;"></i>
+                        توجه
+                    </h3>
+                    <p style="color: var(--light-text); line-height: 1.8;">
+                        این تیکت بسته شده است. برای ارسال پاسخ جدید، لطفاً یک تیکت جدید ایجاد کنید.
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

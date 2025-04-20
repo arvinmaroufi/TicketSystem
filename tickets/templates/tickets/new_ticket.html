@@ -1,0 +1,56 @@
+{% extends 'dashboard.html' %}
+{% block title %}تیکت جدید{% endblock %}
+{% load static %}
+
+
+{% block content %}
+    <div class="main-content">
+        <div class="header">
+            <h2>ایجاد تیکت جدید</h2>
+            <div class="user-info">
+                <span>{{ request.user.username }}</span>
+                {% if request.user.profile.image %}
+                    <img src="{{ request.user.profile.image.url }}" alt="{{ request.user.username }}">
+                {% else %}
+                    <img src="{% static 'images/profile.png' %}" alt="{{ request.user.username }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="ticket-form">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="subject">موضوع</label>
+                    <input type="text" id="subject" name="subject" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="department">دپارتمان</label>
+                    <select id="department" name="department" class="form-control" required>
+                        {% for dept in departments %}
+                            <option value="{{ dept.id }}">{{ dept.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="priority">اولویت</label>
+                    <select id="priority" name="priority" class="form-control" required>
+                        {% for priority in priorities %}
+                            <option value="{{ priority.id }}">{{ priority.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">پیام</label>
+                    <textarea id="message" name="message" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="attachment">پیوست</label>
+                    <input type="file" id="attachment" name="attachment" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">ارسال تیکت</button>
+                <a href="{% url 'tickets:dashboard' %}" style="text-decoration: none" class="btn btn-danger">انصراف</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'dashboard.html' %}
+{% block title %}تیکت ها{% endblock %}
+{% load static %}
+{% load jalali_tags %}
+
+
+{% block content %}
+    <div class="main-content">
+        <div class="header">
+            <h2>تیکت ‌ها</h2>
+            <div class="user-info">
+                <span>{{ request.user.username }}</span>
+                {% if request.user.profile.image %}
+                    <img src="{{ request.user.profile.image.url }}" alt="{{ request.user.username }}">
+                {% else %}
+                    <img src="{% static 'images/profile.png' %}" alt="{{ request.user.username }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="search-container">
+            <form class="search-form" action="{% url 'tickets:ticket_search' %}" method="get" role="search">
+                <div class="search-input-group">
+                    <input type="text" class="form-control search-input" name="search" value="{{ request.GET.search }}"
+                           placeholder="جستجو در تیکت ‌ها...">
+                    <button type="submit" class="btn btn-primary search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {% if is_admin %}
+            <div style="margin-top: 40px; background-color: rgba(212, 175, 55, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <h3 style="color: #D4AF37; margin-bottom: 15px; font-size: 1.2rem;">
+                    <i class="fas fa-lightbulb" style="margin-left: 8px;"></i>
+                    نکته مهم
+                </h3>
+                <p style="color: var(--light-text); line-height: 1.8;">
+                    شما به عنوان مدیر می ‌توانید تمام تیکت‌ ها را مشاهده کنید.
+                </p>
+            </div>
+        {% endif %}
+
+        <div class="ticket-table">
+            <table>
+                <thead>
+                <tr>
+                    <th>شماره تیکت</th>
+                    {% if is_admin %}
+                        <th>کاربر</th>
+                    {% endif %}
+                    <th>موضوع</th>
+                    <th>وضعیت</th>
+                    <th>اولویت</th>
+                    <th>تاریخ ایجاد</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if tickets %}
+                    {% for ticket in tickets %}
+                        <tr>
+                            <td>#TKT-{{ ticket.id }}</td>
+                            {% if is_admin %}
+                                <td>{{ ticket.user.username }}</td>
+                            {% endif %}
+                            <td>{{ ticket.subject }}</td>
+                            <td><span class="status"
+                                      style="background-color: {{ ticket.status.color }}">{{ ticket.status.name }}</span>
+                            </td>
+                            <td><span class="priority"
+                                      style="background-color: {{ ticket.priority.color }}"></span> {{ ticket.priority.name }}
+                            </td>
+                            <td>{{ ticket.created_at|to_jalali:'%Y/%m/%d' }}</td>
+                            <td>
+                                <a href="{% url 'tickets:ticket_detail' ticket.pk %}" style="text-decoration: none"
+                                   class="btn btn-primary">مشاهده</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="{% if is_admin %}7{% else %}6{% endif %}" style="text-align: center; color: #888;">
+                            هیچ تیکتی وجود ندارد
+                        </td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                {% if tickets.has_other_pages %}
+                    <ul class="pagination">
+                        {% if tickets.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ tickets.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                                   aria-label="Previous">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% for page in pages_to_show %}
+                            {% if page == '...' %}
+                                <li class="page-item"><a class="page-link">...</a></li>
+                            {% elif tickets.number == page %}
+                                <li class="page-item active"><a class="page-link" href="?page={{ page }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ page }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ page }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if tickets.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ tickets.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" aria-label="Next">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

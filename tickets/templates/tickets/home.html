@@ -5,7 +5,7 @@
 
 {% block content %}
     <div class="main-content">
-        <!-- هدر -->
+        <!-- Header -->
         <div class="header">
             <h2>داشبورد</h2>
             <div class="user-info">
@@ -18,13 +18,38 @@
             </div>
         </div>
 
-        <!-- کارت‌های آماری -->
+        {% if is_admin %}
+            <div id="admin-notice" style="margin-top: 40px; margin-bottom: 40px; background-color: rgba(212, 175, 55, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <h3 style="color: #D4AF37; margin-bottom: 15px; font-size: 1.2rem;">
+                    <i class="fas fa-warning" style="margin-left: 8px;"></i>
+                    توجه
+                </h3>
+                <p style="color: var(--light-text); line-height: 1.8;">
+                    شما به عنوان مدیر، در این قسمت فقط تعداد تیکت های ثبت شده توسط خود را خواهید دید.
+                </p>
+            </div>
+
+            <script>
+                setTimeout(function() {
+                    var notice = document.getElementById('admin-notice');
+                    if (notice) {
+                        notice.style.opacity = '0';
+                        notice.style.transition = 'opacity 0.5s ease';
+                        setTimeout(function() {
+                            notice.remove();
+                        }, 500);
+                    }
+                }, 4000);
+            </script>
+        {% endif %}
+
+        <!-- Statistical cards -->
         <div class="cards">
             <div class="card">
                 <div class="card-header">
                     <div>
                         <h3>{{ ticket_stats.new }}</h3>
-                        <p>تیکت‌های جدید</p>
+                        <p>تیکت ‌های جدید</p>
                     </div>
                     <div class="card-icon blue">
                         <i class="fas fa-ticket-alt"></i>
@@ -45,8 +70,8 @@
             <div class="card">
                 <div class="card-header">
                     <div>
-                        <h3>{{ ticket_stats.resolved }}</h3>
-                        <p>حل شده</p>
+                        <h3>{{ ticket_stats.answered }}</h3>
+                        <p>پاسخ داده شده</p>
                     </div>
                     <div class="card-icon green">
                         <i class="fas fa-check-circle"></i>
@@ -66,16 +91,86 @@
             </div>
         </div>
 
-        <!-- جدول تیکت‌های اخیر -->
+        <!-- Profile -->
+        <div class="profile-card" style="margin-bottom: 30px;">
+            <div class="profile-background"
+                 style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(18, 18, 18, 0.7));"></div>
+
+            <div class="profile-content">
+                <div class="profile-image-container">
+                    {% if profile.image %}
+                        <img src="{{ profile.image.url }}" alt="{{ profile.username }}" class="profile-image">
+                    {% else %}
+                        <img src="{% static 'images/profile.png' %}" alt="{{ profile.username }}" class="profile-image">
+                    {% endif %}
+                    <div class="profile-status"></div>
+                </div>
+
+                <div class="profile-info">
+                    <h2 class="profile-name">
+                        {% if profile.first_name and profile.last_name %}
+                            {{ profile.first_name }} {{ profile.last_name }}
+                        {% else %}
+                            نام و نام خانوادگی کامل ثبت نشده
+                        {% endif %}
+                    </h2>
+                    <p class="profile-username">@{{ profile.user.username }}</p>
+
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>عضو از {{ request.user.date_joined|to_jalali:'%Y/%m/%d' }}</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ profile.email|default:"ثبت نشده" }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-phone"></i>
+                            <span>{{ profile.phone|default:"ثبت نشده" }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-info-circle"></i>
+                            <span>{{ profile.about_me|default:"توضیحاتی ثبت نشده" }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#edit_profile" style="text-decoration: none" class="btn btn-primary profile-edit-btn">
+                    <i class="fas fa-edit"></i> ویرایش پروفایل
+                </a>
+            </div>
+        </div>
+
+        {% if is_admin %}
+            <div style="margin-top: 40px; background-color: rgba(212, 175, 55, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <h3 style="color: #D4AF37; margin-bottom: 15px; font-size: 1.2rem;">
+                    <i class="fas fa-lightbulb" style="margin-left: 8px;"></i>
+                    نکته مهم
+                </h3>
+                <p style="color: var(--light-text); line-height: 1.8;">
+                    شما به عنوان مدیر می ‌توانید تمام تیکت‌ ها را مشاهده کنید.
+                </p>
+            </div>
+        {% endif %}
+
+        <!-- Recent Ticket -->
         <div class="ticket-table">
             <div class="header">
                 <h2>تیکت‌های اخیر</h2>
-                <button class="btn btn-primary">تیکت جدید</button>
+                <a href="{% url 'tickets:new_ticket' %}" style="text-decoration: none" class="btn btn-primary">تیکت
+                    جدید</a>
             </div>
             <table>
                 <thead>
                 <tr>
                     <th>شماره تیکت</th>
+                    {% if is_admin %}
+                        <th>کاربر</th>
+                    {% endif %}
                     <th>موضوع</th>
                     <th>وضعیت</th>
                     <th>اولویت</th>
@@ -84,18 +179,35 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for ticket in recent_tickets %}
+                {% if recent_tickets %}
+                    {% for ticket in recent_tickets %}
+                        <tr>
+                            <td>#TKT-{{ ticket.id }}</td>
+                            {% if is_admin %}
+                                <td>{{ ticket.user.username }}</td>
+                            {% endif %}
+                            <td>{{ ticket.subject }}</td>
+                            <td><span class="status"
+                                      style="background-color: {{ ticket.status.color }}">{{ ticket.status.name }}</span>
+                            </td>
+                            <td><span class="priority"
+                                      style="background-color: {{ ticket.priority.color }}"></span> {{ ticket.priority.name }}
+                            </td>
+                            <td>{{ ticket.created_at|to_jalali:'%Y/%m/%d' }}</td>
+                            <td>
+                                <a href="{% url 'tickets:ticket_detail' ticket.pk %}" style="text-decoration: none"
+                                   class="btn btn-primary">مشاهده</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
                     <tr>
-                        <td>#TKT-{{ ticket.id }}</td>
-                        <td>{{ ticket.subject }}</td>
-                        <td><span class="status" style="background-color: {{ ticket.status.color }}">{{ ticket.status.name }}</span></td>
-                        <td><span class="priority" style="background-color: {{ ticket.priority.color }}"></span> {{ ticket.priority.name }}</td>
-                        <td>{{ ticket.created_at|to_jalali:'%Y/%m/%d' }}</td>
-                        <td>
-                            <button class="btn btn-primary">مشاهده</button>
+                        <td colspan="{% if is_admin %}7{% else %}6{% endif %}"
+                            style="text-align: center; color: #888;">
+                            هیچ تیکتی وجود ندارد
                         </td>
                     </tr>
-                {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>
