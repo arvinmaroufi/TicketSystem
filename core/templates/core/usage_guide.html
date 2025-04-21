@@ -23,20 +23,29 @@
             </div>
         </section>
 
-        <section class="features-section" style="background-color: rgba(18, 18, 18, 0.7); padding: 30px; border-radius: 15px; margin-bottom: 40px;">
+        <section class="features-section"
+                 style="background-color: rgba(18, 18, 18, 0.7); padding: 30px; border-radius: 15px; margin-bottom: 40px;">
             <h2 class="section-title" style="text-align: center; margin-bottom: 25px;">فهرست مطالب</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                <a href="#dashboard" class="btn btn-outline" style="text-align: center; padding: 12px; text-decoration: none;">
+                <a href="#dashboard" class="btn btn-outline"
+                   style="text-align: center; padding: 12px; text-decoration: none;">
                     <i class="fas fa-tachometer-alt"></i> داشبورد
                 </a>
-                <a href="#tickets" class="btn btn-outline" style="text-align: center; padding: 12px; text-decoration: none;">
-                    <i class="fas fa-ticket-alt"></i> مدیریت تیکت‌ها
+                <a href="#tickets" class="btn btn-outline"
+                   style="text-align: center; padding: 12px; text-decoration: none;">
+                    <i class="fas fa-ticket-alt"></i> مدیریت تیکت ‌ها
                 </a>
-                <a href="#new-ticket" class="btn btn-outline" style="text-align: center; padding: 12px; text-decoration: none;">
+                <a href="#new-ticket" class="btn btn-outline"
+                   style="text-align: center; padding: 12px; text-decoration: none;">
                     <i class="fas fa-plus-circle"></i> ایجاد تیکت جدید
                 </a>
-                <a href="#customers" class="btn btn-outline" style="text-align: center; padding: 12px; text-decoration: none;">
-                    <i class="fas fa-users"></i> مدیریت مشتریان
+                <a href="#customers" class="btn btn-outline"
+                   style="text-align: center; padding: 12px; text-decoration: none;">
+                    <i class="fas fa-users"></i> مدیریت کاربران
+                </a>
+                <a href="#profile" class="btn btn-outline"
+                   style="text-align: center; padding: 12px; text-decoration: none;">
+                    <i class="fas fa-user-cog"></i>ویرایش پروفایل
                 </a>
             </div>
         </section>
@@ -48,15 +57,16 @@
                 <div class="feature-icon">
                     <i class="fas fa-chart-pie"></i>
                 </div>
-                <h3 class="feature-title">کارت‌های آماری</h3>
+                <h3 class="feature-title">کارت‌ های آماری</h3>
                 <p class="feature-desc">
-                    در بخش بالای داشبورد، چهار کارت آماری مشاهده می‌کنید که وضعیت تیکت‌ها را به صورت خلاصه نمایش می‌دهند:
-                    <ul style="margin-right: 20px; margin-top: 10px; color: var(--light-text);">
-                        <li>تیکت‌های جدید (آبی)</li>
-                        <li>تیکت‌های در حال بررسی (نارنجی)</li>
-                        <li>تیکت‌های حل شده (سبز)</li>
-                        <li>تیکت‌های بسته شده (قرمز)</li>
-                    </ul>
+                    در بخش بالای داشبورد، چهار کارت آماری مشاهده می‌کنید که وضعیت تیکت‌ها را به صورت خلاصه نمایش
+                    می‌دهند:
+                <ul style="margin-right: 20px; margin-top: 10px; color: var(--light-text);">
+                    <li>تیکت‌ های جدید</li>
+                    <li>تیکت‌ های در حال بررسی</li>
+                    <li>تیکت‌ های پاسخ داده شده</li>
+                    <li>تیکت‌ های بسته شده</li>
+                </ul>
                 </p>
             </div>
 
@@ -64,17 +74,18 @@
                 <div class="feature-icon">
                     <i class="fas fa-table"></i>
                 </div>
-                <h3 class="feature-title">جدول تیکت‌های اخیر</h3>
+                <h3 class="feature-title">جدول تیکت‌ های اخیر</h3>
                 <p class="feature-desc">
-                    در بخش پایین داشبورد، جدولی از آخرین تیکت‌های ایجاد شده را مشاهده می‌کنید که شامل این اطلاعات است:
-                    <ul style="margin-right: 20px; margin-top: 10px; color: var(--light-text);">
-                        <li>شماره تیکت</li>
-                        <li>موضوع تیکت</li>
-                        <li>وضعیت تیکت (باز، در حال بررسی، حل شده، بسته شده)</li>
-                        <li>اولویت تیکت (پایین، متوسط، بالا)</li>
-                        <li>تاریخ ایجاد</li>
-                        <li>دکمه مشاهده برای جزئیات بیشتر</li>
-                    </ul>
+                    در بخش پایین داشبورد، جدولی از آخرین تیکت‌ های جواب داده شده را مشاهده می‌کنید که شامل این اطلاعات
+                    است:
+                <ul style="margin-right: 20px; margin-top: 10px; color: var(--light-text);">
+                    <li>شناسه تیکت</li>
+                    <li>موضوع تیکت</li>
+                    <li>وضعیت تیکت</li>
+                    <li>اولویت تیکت</li>
+                    <li>تاریخ ایجاد</li>
+                    <li>دکمه مشاهده برای جزئیات بیشتر</li>
+                </ul>
                 </p>
             </div>
         </section>
@@ -83,45 +94,15 @@
             <h2 class="section-title">مدیریت تیکت‌ها</h2>
 
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-filter"></i>
-                    </div>
-                    <h3 class="feature-title">فیلتر کردن تیکت‌ها</h3>
-                    <p class="feature-desc">
-                        در صفحه مدیریت تیکت‌ها می‌توانید از فیلترهای مختلف برای دسته‌بندی تیکت‌ها استفاده کنید:
-                        - فیلتر بر اساس وضعیت
-                        - فیلتر بر اساس اولویت
-                        - فیلتر بر اساس تاریخ
-                    </p>
-                </div>
+
 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                    <h3 class="feature-title">جستجوی تیکت‌ها</h3>
+                    <h3 class="feature-title">جستجوی تیکت ‌ها</h3>
                     <p class="feature-desc">
-                        از نوار جستجو می‌توانید تیکت‌ها را بر اساس:
-                        - شماره تیکت
-                        - موضوع تیکت
-                        - محتوای تیکت
-                        - نام مشتری
-                        جستجو کنید.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h3 class="feature-title">تغییر وضعیت تیکت‌ها</h3>
-                    <p class="feature-desc">
-                        برای تغییر وضعیت تیکت‌ها:
-                        1. تیکت مورد نظر را انتخاب کنید
-                        2. از منوی عملیات، وضعیت جدید را انتخاب نمایید
-                        3. در صورت نیاز، توضیحات اضافه کنید
-                        4. تغییرات را ذخیره کنید
+                        از نوار جستجو می‌توانید تیکت‌ها را بر اساس موضوع تیکت جستجو کنید.
                     </p>
                 </div>
             </div>
@@ -151,15 +132,15 @@
                 <h3 class="feature-title">فرم ایجاد تیکت</h3>
                 <p class="feature-desc">
                     برای ایجاد تیکت جدید:
-                    <ol style="margin-right: 20px; margin-top: 10px; color: var(--light-text);">
-                        <li>از منوی سمت راست روی "تیکت جدید" کلیک کنید</li>
-                        <li>موضوع تیکت را وارد نمایید</li>
-                        <li>دپارتمان مربوطه را انتخاب کنید</li>
-                        <li>اولویت تیکت را مشخص کنید</li>
-                        <li>توضیحات کامل مشکل یا درخواست را بنویسید</li>
-                        <li>در صورت نیاز فایل پیوست اضافه کنید</li>
-                        <li>روی دکمه "ارسال تیکت" کلیک کنید</li>
-                    </ol>
+                <ol style="margin-right: 20px; margin-top: 10px; color: var(--light-text);">
+                    <li>از منوی سمت راست روی "تیکت جدید" کلیک کنید</li>
+                    <li>موضوع تیکت را وارد نمایید</li>
+                    <li>دپارتمان مربوطه را انتخاب کنید</li>
+                    <li>اولویت تیکت را مشخص کنید</li>
+                    <li>توضیحات کامل مشکل یا درخواست را بنویسید</li>
+                    <li>در صورت نیاز فایل پیوست اضافه کنید</li>
+                    <li>روی دکمه "ارسال تیکت" کلیک کنید</li>
+                </ol>
                 </p>
             </div>
 
@@ -175,47 +156,43 @@
         </section>
 
         <section id="customers" class="features-section">
-            <h2 class="section-title">مدیریت مشتریان</h2>
+            <h2 class="section-title">مدیریت کاربران</h2>
 
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-user-plus"></i>
+                        <i class="fas fa-trash"></i>
                     </div>
-                    <h3 class="feature-title">افزودن مشتری جدید</h3>
+                    <h3 class="feature-title">حذف کامل کاربر</h3>
                     <p class="feature-desc">
-                        برای افزودن مشتری جدید:
-                        1. به بخش "مشتریان" بروید
-                        2. روی دکمه "مشتری جدید" کلیک کنید
-                        3. اطلاعات مشتری را وارد کنید
-                        4. اطلاعات را ذخیره کنید
+                        برای حذف کاربر کافی است وارد صفحه "کاربران" شوید و با کلیک روی دکمه "حذف کابر" ، کاربر و پروفایل
+                        مربوط به کاربر کامل حذف خواهد شد.
                     </p>
                 </div>
+            </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <h3 class="feature-title">تاریخچه تیکت‌های مشتری</h3>
-                    <p class="feature-desc">
-                        در صفحه هر مشتری می‌توانید:
-                        - تمام تیکت‌های ارسالی توسط مشتری را مشاهده کنید
-                        - وضعیت تیکت‌ها را بررسی کنید
-                        - زمان پاسخگویی را تحلیل کنید
-                    </p>
-                </div>
+            <div style="margin-top: 40px; background-color: rgba(212, 175, 55, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(212, 175, 55, 0.1);">
+                <h3 style="color: var(--accent); margin-bottom: 15px; font-size: 1.2rem;">
+                    <i class="fas fa-lightbulb" style="margin-left: 8px;"></i>
+                    نکته مهم
+                </h3>
+                <p style="color: var(--light-text); line-height: 1.8;">
+                    برای حذف کامل کاربر باید مدیر باشید و این امکان برای کاربر عادی امکان پذیر نیست
+                </p>
+            </div>
+        </section>
 
+        <section id="profile" class="features-section">
+            <h2 class="section-title">ویرایش پروفایل</h2>
+
+            <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-edit"></i>
                     </div>
-                    <h3 class="feature-title">ویرایش اطلاعات مشتری</h3>
+                    <h3 class="feature-title">ویرایش پروفایل کاربر</h3>
                     <p class="feature-desc">
-                        برای ویرایش اطلاعات مشتری:
-                        1. مشتری مورد نظر را انتخاب کنید
-                        2. روی دکمه "ویرایش" کلیک کنید
-                        3. تغییرات مورد نظر را اعمال کنید
-                        4. تغییرات را ذخیره کنید
+                        امکان ویرایش "نام" ، "نام خانوادگی" ، "شماره تلفن" ، "ایمیل" ، "تصویر پروفایل" و "درباره من".
                     </p>
                 </div>
             </div>
@@ -225,23 +202,66 @@
             <h2 class="section-title" style="text-align: center;">سوالات متداول</h2>
 
             <div class="feature-card" style="margin-bottom: 20px;">
-                <h3 class="feature-title">چگونه می‌توانم چند تیکت را همزمان مدیریت کنم؟</h3>
+                <h3 class="feature-title">چگونه می‌توانم یک تیکت جدید ایجاد کنم؟</h3>
                 <p class="feature-desc">
-                    در صفحه لیست تیکت‌ها، با استفاده از چک‌باکس‌های کنار هر تیکت می‌توانید چند مورد را انتخاب و سپس عملیات گروهی (مانند تغییر وضعیت یا اختصاص به کارشناس) انجام دهید.
+                    از منوی سمت راست روی گزینه "تیکت جدید" کلیک کنید، فرم را پر کنید و روی دکمه "ارسال تیکت" کلیک
+                    نمایید. حتما موضوع و توضیحات کامل را وارد کنید.
                 </p>
             </div>
 
             <div class="feature-card" style="margin-bottom: 20px;">
-                <h3 class="feature-title">آیا امکان ارسال پاسخ‌های از پیش تعریف شده وجود دارد؟</h3>
+                <h3 class="feature-title">چگونه می‌توانم وضعیت تیکت خود را پیگیری کنم؟</h3>
                 <p class="feature-desc">
-                    بله، در بخش «پاسخ‌های سریع» می‌توانید متن‌های از پیش تعریف شده ایجاد کنید و هنگام پاسخ به تیکت‌ها از آنها استفاده نمایید.
+                    در صفحه داشبورد یا بخش "تیکت‌ها" می‌توانید لیست تمام تیکت‌های خود را با وضعیت آنها مشاهده کنید.
+                    همچنین با کلیک روی هر تیکت می‌توانید جزئیات و تاریخچه آن را ببینید.
                 </p>
             </div>
 
-            <div class="feature-card">
-                <h3 class="feature-title">چگونه می‌توانم دسترسی اعضای تیم را محدود کنم؟</h3>
+            <div class="feature-card" style="margin-bottom: 20px;">
+                <h3 class="feature-title">آیا امکان پیوست فایل به تیکت وجود دارد؟</h3>
                 <p class="feature-desc">
-                    در بخش «تنظیمات تیم» برای هر کاربر می‌توانید سطح دسترسی تعیین کنید (مثل ادمین، کارشناس پشتیبانی، کاربر عادی). همچنین می‌توانید دسترسی به پروژه‌های خاص را محدود نمایید.
+                    بله، هنگام ایجاد تیکت جدید یا پاسخ به تیکت موجود، می‌توانید فایل‌های مرتبط را پیوست کنید. حداکثر حجم
+                    مجاز برای هر فایل 5 مگابایت است.
+                </p>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 20px;">
+                <h3 class="feature-title">چگونه می‌توانم تیکت را به بخش دیگری انتقال دهم؟</h3>
+                <p class="feature-desc">
+                    در صفحه جزئیات تیکت، روی دکمه "تغییر دپارتمان" کلیک کنید و بخش جدید را انتخاب نمایید. این امکان فقط
+                    برای مدیران و کارشناسان سیستم قابل دسترسی است.
+                </p>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 20px;">
+                <h3 class="feature-title">آیا امکان اولویت‌بندی تیکت‌ها وجود دارد؟</h3>
+                <p class="feature-desc">
+                    بله، هنگام ایجاد تیکت می‌توانید از بین سه سطح اولویت (کم، متوسط، زیاد) انتخاب کنید. همچنین کارشناسان
+                    می‌توانند اولویت تیکت‌ها را تغییر دهند.
+                </p>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 20px;">
+                <h3 class="feature-title">چگونه می‌توانم رمز عبور خود را تغییر دهم؟</h3>
+                <p class="feature-desc">
+                    از منوی سمت راست روی گزینه "تنظیمات" کلیک کنید و سپس گزینه "تغییر رمز عبور" را انتخاب نمایید. رمز
+                    عبور جدید باید حداقل 8 کاراکتر داشته باشد.
+                </p>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 20px;">
+                <h3 class="feature-title">آیا امکان جستجو در بین تیکت‌های قدیمی وجود دارد؟</h3>
+                <p class="feature-desc">
+                    بله، در صفحه "تیکت‌ها" می‌توانید از نوار جستجو استفاده کنید. امکان فیلتر کردن بر اساس تاریخ، وضعیت،
+                    اولویت و دپارتمان نیز وجود دارد.
+                </p>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 20px;">
+                <h3 class="feature-title">چرا برخی از گزینه‌های منو برای من غیرفعال است؟</h3>
+                <p class="feature-desc">
+                    برخی از امکانات مانند مدیریت کاربران فقط برای مدیران سیستم قابل دسترسی است. اگر به این بخش‌ها نیاز
+                    دارید، با مدیر سیستم تماس بگیرید.
                 </p>
             </div>
         </section>

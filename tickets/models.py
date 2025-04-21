@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from shortuuid.django_fields import ShortUUIDField
 
 
 class Department(models.Model):
@@ -41,6 +42,7 @@ class TicketStatus(models.Model):
 
 
 class Ticket(models.Model):
+    tid = ShortUUIDField(unique=True, length=5, max_length=20, prefix="TKT-", alphabet="0123456789", verbose_name="شناسه تیکت")
     subject = models.CharField(max_length=200, verbose_name="موضوع")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tickets', verbose_name="کاربر")
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, verbose_name="دپارتمان")
@@ -65,7 +67,6 @@ class TicketMessage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="کاربر")
     message = models.TextField(verbose_name="پیام")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
-    is_internal = models.BooleanField(default=False, verbose_name="پیام داخلی")
 
     def save(self, *args, **kwargs):
         if not self.user_id:

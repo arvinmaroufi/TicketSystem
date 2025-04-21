@@ -78,13 +78,13 @@ class LoginForm(forms.Form):
 
 class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'رمز عبور فعلی'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
     new_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'رمز عبور جدید'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
     confirm_new_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'تکرار رمز عبور جدید'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
 
     def clean_new_password(self):

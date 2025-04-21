@@ -1,0 +1,66 @@
+{% extends 'dashboard.html' %}
+{% block title %}ویرایش پروفایل{% endblock %}
+{% load static %}
+
+
+{% block content %}
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <h2>ویرایش پروفایل</h2>
+            <div class="user-info">
+                <span>{{ request.user.username }}</span>
+                {% if request.user.profile.image %}
+                    <img src="{{ request.user.profile.image.url }}" alt="{{ request.user.username }}">
+                {% else %}
+                    <img src="{% static 'images/profile.png' %}" alt="{{ request.user.username }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Edit Profile Form -->
+        <div class="profile-form">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">نام</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">نام خانوادگی</label>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">ایمیل</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">تلفن همراه</label>
+                        {{ form.phone }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="avatar">تصویر پروفایل</label>
+                        {{ form.image }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bio">درباره من</label>
+                    {{ form.about_me }}
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+                    <a href="{% url 'tickets:dashboard' %}" style="text-decoration: none" type="button" class="btn btn-danger">انصراف</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

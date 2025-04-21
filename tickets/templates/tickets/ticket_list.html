@@ -46,7 +46,7 @@
             <table>
                 <thead>
                 <tr>
-                    <th>شماره تیکت</th>
+                    <th>شناسه تیکت</th>
                     {% if is_admin %}
                         <th>کاربر</th>
                     {% endif %}
@@ -61,7 +61,7 @@
                 {% if tickets %}
                     {% for ticket in tickets %}
                         <tr>
-                            <td>#TKT-{{ ticket.id }}</td>
+                            <td>{{ ticket.tid }}</td>
                             {% if is_admin %}
                                 <td>{{ ticket.user.username }}</td>
                             {% endif %}
@@ -74,7 +74,7 @@
                             </td>
                             <td>{{ ticket.created_at|to_jalali:'%Y/%m/%d' }}</td>
                             <td>
-                                <a href="{% url 'tickets:ticket_detail' ticket.pk %}" style="text-decoration: none"
+                                <a href="{% url 'tickets:ticket_detail' ticket.tid %}" style="text-decoration: none"
                                    class="btn btn-primary">مشاهده</a>
                             </td>
                         </tr>

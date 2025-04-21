@@ -1,5 +1,5 @@
 {% extends 'dashboard.html' %}
-{% block title %}جزئیات{% endblock %}
+{% block title %}جزئیات تیکت {{ ticket.tid }}{% endblock %}
 {% load static %}
 {% load jalali_tags %}
 {% load custom_filters %}
@@ -23,7 +23,7 @@
                 <div>
                     <h3 class="ticket-title">{{ ticket.subject }}</h3>
                     <div class="ticket-meta">
-                        <span>شماره تیکت: #TKT-{{ ticket.id }}</span>
+                        <span>شناسه تیکت: {{ ticket.tid }}</span>
                         <span>وضعیت: <span class="status"
                                            style="background-color: {{ ticket.status.color }}">{{ ticket.status.name }}</span></span>
                         <span>اولویت: <span class="priority"
@@ -33,7 +33,7 @@
                 </div>
                 <div class="ticket-actions">
                     {% if is_admin %}
-                        <form method="post" action="{% url 'tickets:close_ticket' ticket.id %}">
+                        <form method="post" action="{% url 'tickets:close_ticket' ticket.tid %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i> بستن تیکت</button>
                         </form>
@@ -111,7 +111,7 @@
             {% if not ticket.is_closed and not ticket.status.is_closed %}
                 <div class="ticket-reply">
                     <h4>پاسخ به تیکت</h4>
-                    <form method="post" action="{% url 'tickets:reply_ticket' ticket.id %}"
+                    <form method="post" action="{% url 'tickets:reply_ticket' ticket.tid %}"
                           enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">

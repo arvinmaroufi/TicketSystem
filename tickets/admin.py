@@ -28,7 +28,7 @@ class TicketMessageInline(admin.TabularInline):
 
 @admin.register(models.Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ['subject', 'user', 'department', 'status', 'priority', 'created_at']
+    list_display = ['tid', 'subject', 'user', 'department', 'status', 'priority', 'created_at']
     list_filter = ['status', 'priority', 'department', 'created_at']
     search_fields = ['subject', 'user__username']
     inlines = [TicketMessageInline]

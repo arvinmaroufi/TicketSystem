@@ -1,0 +1,64 @@
+{% extends 'dashboard.html' %}
+{% block title %}کاربران{% endblock %}
+{% load static %}
+{% load jalali_tags %}
+
+
+{% block content %}
+    <div class="main-content">
+        <div class="header">
+            <h2>کاربران</h2>
+            <div class="user-info">
+                <span>{{ request.user.username }}</span>
+                {% if request.user.profile.image %}
+                    <img src="{{ request.user.profile.image.url }}" alt="{{ request.user.username }}">
+                {% else %}
+                    <img src="{% static 'images/profile.png' %}" alt="{{ request.user.username }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="user-table">
+            <table>
+                <thead>
+                <tr>
+                    <th>نام کاربری</th>
+                    <th>نام</th>
+                    <th>نام خانوادگی</th>
+                    <th>ایمیل</th>
+                    <th>شماره تلفن</th>
+                    <th>نقش</th>
+                    <th>تاریخ عضویت</th>
+                    <th>تاریخ آخرین ورود</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.profile.first_name|default:"ثبت نشده"  }}</td>
+                        <td>{{ user.profile.last_name|default:"ثبت نشده"  }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.profile.phone|default:"ثبت نشده"  }}</td>
+                        <td>
+                            {% if user.is_superuser %}
+                                مدیر
+                            {% else %}
+                                کاربر
+                            {% endif %}
+                        </td>
+                        <td>{{ request.user.date_joined|to_jalali:'%Y/%m/%d' }}</td>
+                        <td>{{ request.user.last_login|to_jalali:'%Y/%m/%d' }}</td>
+                        <td>
+                            <a href="{% url 'tickets:delete_user' user.username %}" style="text-decoration: none" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>حذف کاربر
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

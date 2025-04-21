@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # installed apps
     'jalali_date',
+    'django_cleanup.apps.CleanupConfig',
     # my apps
     'core',
     'accounts',

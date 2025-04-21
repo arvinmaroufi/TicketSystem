@@ -44,20 +44,22 @@
                         <span>تیکت جدید</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#users">
+                {% if request.user.is_superuser %}
+                    <li class="{% if request.resolver_match.url_name == 'user_list' %}active{% endif %}">
+                    <a href="{% url 'tickets:user_list' %}">
                         <i class="fas fa-users"></i>
                         <span>کاربران</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#edit_profile">
+                {% endif %}
+                <li class="{% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+                    <a href="{% url 'tickets:edit_profile' request.user.profile.user.username %}">
                         <i class="fas fa-user-cog"></i>
                         <span>ویرایش پروفایل</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#settings">
+                <li class="{% if request.resolver_match.url_name == 'change_password' %}active{% endif %}">
+                    <a href="{% url 'tickets:change_password' %}">
                         <i class="fas fa-cog"></i>
                         <span>تنظیمات</span>
                     </a>

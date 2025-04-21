@@ -7,6 +7,10 @@ from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.utils import timezone
 from django.db.models import Max, OuterRef, Subquery
+from django.contrib.auth.models import User
+from .forms import ProfileEditForm
+from accounts.forms import ChangePasswordForm
+from django.contrib.auth import logout, update_session_auth_hash
 
 
 def get_pages_to_show(current_page, total_pages):
@@ -68,8 +72,8 @@ def ticket_list(request):
 
 
 @login_required
-def ticket_detail(request, pk):
-    ticket = get_object_or_404(Ticket, id=pk)
+def ticket_detail(request, tid):
+    ticket = get_object_or_404(Ticket, tid=tid)
 
     context = {
         'ticket': ticket,
@@ -80,8 +84,8 @@ def ticket_detail(request, pk):
 
 @login_required
 @require_POST
-def reply_ticket(request, pk):
-    ticket = get_object_or_404(Ticket, id=pk)
+def reply_ticket(request, tid):
+    ticket = get_object_or_404(Ticket, tid=tid)
     message_text = request.POST.get('reply-message')
     attachment = request.FILES.get('reply-attachment')
 
@@ -111,13 +115,13 @@ def reply_ticket(request, pk):
 
         ticket.save()
 
-    return redirect('tickets:ticket_detail', pk=ticket.id)
+    return redirect('tickets:ticket_detail', tid=ticket.tid)
 
 
 @login_required
 @require_POST
-def close_ticket(request, pk):
-    ticket = get_object_or_404(Ticket, id=pk)
+def close_ticket(request, tid):
+    ticket = get_object_or_404(Ticket, tid=tid)
 
     if request.user.is_staff or request.user.is_superuser:
         closed_status = TicketStatus.objects.get(name='بسته شده')
@@ -126,7 +130,7 @@ def close_ticket(request, pk):
         ticket.closed_at = timezone.now()
         ticket.save()
 
-    return redirect('tickets:ticket_detail', pk=ticket.id)
+    return redirect('tickets:ticket_detail', tid=ticket.tid)
 
 
 @login_required
@@ -162,7 +166,7 @@ def new_ticket(request):
                     file=attachment
                 )
 
-            return redirect('tickets:ticket_detail', pk=ticket.id)
+            return redirect('tickets:ticket_detail', tid=ticket.tid)
 
         except Exception as e:
             messages.error(request, f'خطا در ایجاد تیکت: {str(e)}')
@@ -176,12 +180,13 @@ def new_ticket(request):
 
 @login_required
 def ticket_search(request):
-    tickets_search = request.GET.get('search')
-
+    search_query = request.GET.get('search').strip()
+    if not search_query:
+        return redirect('tickets:ticket_list')
     if request.user.is_staff or request.user.is_superuser:
-        tickets = Ticket.objects.all().order_by('-created_at')
+        tickets = Ticket.objects.filter(subject__icontains=search_query).order_by('-created_at')
     else:
-        tickets = Ticket.objects.filter(user=request.user, subject__icontains=tickets_search).order_by('-created_at')
+        tickets = Ticket.objects.filter(user=request.user, subject__icontains=search_query).order_by('-created_at')
 
     page_number = request.GET.get('page')
     paginator = Paginator(tickets, 6)
@@ -193,3 +198,66 @@ def ticket_search(request):
         'is_admin': request.user.is_staff or request.user.is_superuser,
     }
     return render(request, 'tickets/ticket_list.html', context)
+
+
+@login_required
+def user_list(request):
+    if request.user.is_superuser == False:
+        return redirect('tickets:dashboard')
+
+    users = User.objects.all()
+
+    context = {
+        'users': users,
+    }
+    return render(request, 'tickets/user_list.html', context)
+
+
+@login_required
+def delete_user(request, username):
+    if request.user.is_superuser == False:
+        return redirect('tickets:dashboard')
+
+    user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(Profile, user=user)
+    profile.delete()
+    user.delete()
+    return redirect('tickets:user_list')
+
+
+@login_required
+def edit_profile(request, username):
+    user = request.user
+    profiles = Profile.objects.get(user=user)
+    profile = get_object_or_404(Profile, user__username=username)
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST or None, request.FILES or None, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('tickets:dashboard')
+    else:
+        form = ProfileEditForm(instance=profile)
+    return render(request, 'tickets/edit_profile.html', {'profiles': profiles, 'form': form})
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            old_password = form.cleaned_data['old_password']
+            new_password = form.cleaned_data['new_password']
+
+            if request.user.check_password(old_password):
+                request.user.set_password(new_password)
+                request.user.save()
+                update_session_auth_hash(request, request.user)
+                logout(request)
+                messages.success(request, 'رمز عبور شما با موفقیت تغییر یافت. لطفاً با رمز عبور جدید وارد شوید.')
+                return redirect('account:login')
+            else:
+                form.add_error('old_password', 'رمز عبور فعلی نادرست است.')
+    else:
+        form = ChangePasswordForm()
+
+    return render(request, 'tickets/change_password.html', {'form': form})

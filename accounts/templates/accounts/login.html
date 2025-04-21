@@ -54,6 +54,22 @@
             box-sizing: border-box;
         }
 
+        .alert-success {
+            background-color: #b0f585;
+            color: #357510;
+            height: auto;
+            min-height: 57.6px;
+            width: 100%;
+            max-width: 370px;
+            margin: 0 0 8px 0;
+            padding: 16px;
+            position: relative;
+            display: block;
+            border: 1px solid #bff1ae;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
 
         .auth-container {
             width: 100%;
@@ -404,6 +420,13 @@
                 <p>لطفاً اطلاعات حساب خود را وارد نمایید</p>
             </div>
 
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert-success alert-{{ message.tags }} alert-auto-dismiss mb-2 mt-2">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             <form class="auth-form" method="post">
                 {% csrf_token %}
                 {% for error in form.non_field_errors %}
@@ -440,5 +463,15 @@
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const alerts = document.querySelectorAll('.alert-auto-dismiss');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.remove();
+                }, 10000);
+            });
+        });
+    </script>
 </body>
 </html>

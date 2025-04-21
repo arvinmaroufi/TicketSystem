@@ -186,17 +186,6 @@ body {
     text-align: center;
 }
 
-@media (max-width: 992px) {
-    .nav-links,
-    .nav-actions {
-        display: none;
-    }
-
-    .hamburger-btn {
-        display: block;
-    }
-}
-
 .btn {
     padding: 10px 20px;
     border-radius: 8px;
@@ -578,6 +567,7 @@ body {
     animation-delay: 0.4s;
 }
 
+
 @media (max-width: 992px) {
     .hero-section {
         flex-direction: column;
@@ -598,8 +588,13 @@ body {
         width: 50%;
     }
 
-    .nav-links {
+    .nav-links,
+    .nav-actions {
         display: none;
+    }
+
+    .hamburger-btn {
+        display: block;
     }
 }
 
